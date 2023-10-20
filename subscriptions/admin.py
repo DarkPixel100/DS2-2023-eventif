@@ -11,7 +11,7 @@ class SubscriptionModelAdmin(admin.ModelAdmin):
     actions = ['mark_as_paid',]
 
     def subscribed_today(self, obj):
-        return obj.created_at == now().date()
+        return obj.created_at.date() == now().date()
 
     def mark_as_paid(self, request, queryset):
         count = queryset.update(paid=True)
