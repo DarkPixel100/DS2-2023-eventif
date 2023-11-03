@@ -31,11 +31,11 @@ class SubscriptionFormTest(TestCase):
 
     def test_must_inform_email_or_phone(self):
         form = self.make_validated_form(email='', phone='')
-        self.assertListEqual(['__all__'])
+        self.assertListEqual(['__all__'], list(form.errors))
 
     def assertFormErrorCode(self, form, field, code):
         errors = form.errors.as_data()
-        error_list = errors['cpf']
+        error_list = errors[field]
         exception = error_list[0]
         self.assertEqual(code, exception.code)
         
