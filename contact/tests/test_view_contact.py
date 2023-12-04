@@ -36,7 +36,7 @@ class ContactPostValidTest(TestCase):
     def test_submit_valid_contact_form(self):
         data = {
             "name": "Diego",
-            "phone": "53-99101-1002",
+            "phone": "53-99976-2828",
             "email": "diego.avila@aluno.riogrande.ifrs.edu.br",
             "message": "oi",
         }
@@ -59,7 +59,7 @@ class ContactSuccessMessageTest(TestCase):
     def test_submit_contact_form_with_success_message(self):
         data = {
             "name": "Diego",
-            "phone": "53-99101-1002",
+            "phone": "53-99976-2828",
             "email": "diego.avila@aluno.riogrande.ifrs.edu.br",
             "message": "oi",
         }

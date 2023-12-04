@@ -6,7 +6,7 @@ class MailTest(TestCase):
     def setUp(self):
         data = {
             "name": "Diego",
-            "phone": "53-99101-1002",
+            "phone": "53-99976-2828",
             "email": "diego.avila@aluno.riogrande.ifrs.edu.br",
             "message": "oi",
         }
@@ -33,7 +33,7 @@ class MailTest(TestCase):
     def test_contact_body(self):
         contents = [
             "Diego",
-            "53-99101-1002",
+            "53-99976-2828",
             "diego.avila@aluno.riogrande.ifrs.edu.br",
             "oi",
         ]

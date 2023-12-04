@@ -9,7 +9,7 @@ class MailTest(TestCase):
             name="Diego",
             cpf="12345678901",
             email="diego.avila@aluno.riogrande.ifrs.edu.br",
-            phone="53-99101-1002",
+            phone="53-99976-2828",
         )
         self.response = self.client.post(r("subscriptions:new"), data)
         self.email = mail.outbox[0]
@@ -31,7 +31,7 @@ class MailTest(TestCase):
             "Diego",
             "12345678901",
             "diego.avila@aluno.riogrande.ifrs.edu.br",
-            "53-99101-1002",
+            "53-99976-2828",
         ]
         for content in contents:
             with self.subTest():

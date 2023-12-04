@@ -15,13 +15,13 @@ class ContactSpeakerModelTest(TestCase):
         contact = ContactSpeaker.objects.create(
             speaker=self.speaker,
             kind=ContactSpeaker.EMAIL,
-            value="diegofavila20@gmail.com",
+            value="diego.avila@aluno.riogrande.ifrs.edu.br",
         )
         self.assertTrue(ContactSpeaker.objects.exists())
 
     def test_phone(self):
         contact = ContactSpeaker.objects.create(
-            speaker=self.speaker, kind=ContactSpeaker.PHONE, value="53999762828"
+            speaker=self.speaker, kind=ContactSpeaker.PHONE, value="53-99976-2828"
         )
         self.assertTrue(ContactSpeaker.objects.exists())
 
@@ -35,6 +35,6 @@ class ContactSpeakerModelTest(TestCase):
         contact = ContactSpeaker(
             speaker=self.speaker,
             kind=ContactSpeaker.EMAIL,
-            value="diegofavila20@gmail.com",
+            value="diego.avila@aluno.riogrande.ifrs.edu.br",
         )
-        self.assertEqual("diegofavila20@gmail.com", str(contact))
+        self.assertEqual("diego.avila@aluno.riogrande.ifrs.edu.br", str(contact))
