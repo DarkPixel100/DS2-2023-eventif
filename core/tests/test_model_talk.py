@@ -20,27 +20,22 @@ class TalkModelTest(TestCase):
             slug="cleber-fonseca",
             website="https://cleberfonseca.com.br",
         )
-
         self.assertEqual(1, self.talk.speakers.count())
 
     def test_description_blank(self):
         field = Talk._meta.get_field("description")
-
         self.assertTrue(field.blank)
 
     def test_spaker_blank(self):
         field = Talk._meta.get_field("speakers")
-
         self.assertTrue(field.blank)
 
     def test_start_blank(self):
         field = Talk._meta.get_field("start")
-
         self.assertTrue(field.blank)
 
     def test_start_null(self):
         field = Talk._meta.get_field("start")
-
         self.assertTrue(field.null)
 
     def test_str(self):

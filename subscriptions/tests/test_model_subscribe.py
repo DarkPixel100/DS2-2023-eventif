@@ -9,7 +9,7 @@ class SubscriptionModelTest(TestCase):
             name="Diego Avila",
             cpf="12345678901",
             email="diegofavila20@gmail.com",
-            phone="53999762828"
+            phone="53999762828",
         )
         self.obj.save()
 
@@ -20,7 +20,7 @@ class SubscriptionModelTest(TestCase):
         self.assertIsInstance(self.obj.created_at, datetime)
 
     def test_str(self):
-        self.assertEqual('Diego Avila', str(self.obj))
+        self.assertEqual("Diego Avila", str(self.obj))
 
     def test_paid_defaut_false(self):
         self.assertEqual(False, self.obj.paid)

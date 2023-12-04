@@ -1,6 +1,7 @@
 from django.core import mail
 from django.test import TestCase
 
+
 class MailTest(TestCase):
     def setUp(self):
         data = {
@@ -9,7 +10,7 @@ class MailTest(TestCase):
             "email": "diego.avila@aluno.riogrande.ifrs.edu.br",
             "message": "oi",
         }
-        self.response = self.client.post('/contato/', data)
+        self.response = self.client.post("/contato/", data)
         self.email = mail.outbox[0]
 
     def assertEmailFieldEqual(self, field_name, expected_value):
@@ -23,10 +24,18 @@ class MailTest(TestCase):
         self.assertEmailFieldEqual("from_email", "contato@eventif.com.br")
 
     def test_contact_email_to(self):
-        expected_to = ['contato@eventif.com.br', 'diego.avila@aluno.riogrande.ifrs.edu.br']
+        expected_to = [
+            "contato@eventif.com.br",
+            "diego.avila@aluno.riogrande.ifrs.edu.br",
+        ]
         self.assertEqual(expected_to, self.email.to)
 
     def test_contact_body(self):
-        contents = ["Diego", "53-99101-1002", "diego.avila@aluno.riogrande.ifrs.edu.br", "oi"]
+        contents = [
+            "Diego",
+            "53-99101-1002",
+            "diego.avila@aluno.riogrande.ifrs.edu.br",
+            "oi",
+        ]
         email_body = self.email.body
         self.assertTrue(all(content in email_body for content in contents))
