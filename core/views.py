@@ -8,6 +8,5 @@ def home(request):
 
 def speaker_detail(request, slug):
     speaker = get_object_or_404(Speaker, slug=slug)
-    speaker = Speaker.objects.get(slug=slug)
     return render(request, 'core/speaker_detail.html', {'speaker': speaker})
 

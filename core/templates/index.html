@@ -67,7 +67,7 @@
             {% for speaker in speakers %}
                 <div class="desktop-4">
                     <img src="{{ speaker.photo }}">
-                    <h4><a href="{{ speaker.get_absolute_url }}"></a>{{ speaker.name }}</h4>
+                    <h4><a href="{{ speaker.get_absolute_url }}">{{ speaker.name }}</a></h4>
                 </div>
             {% endfor %}
         </div>
