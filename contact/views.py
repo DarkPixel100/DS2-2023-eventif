@@ -11,8 +11,7 @@ from contact.forms import ContactForm
 def contact(request):
     if request.method == "POST":
         return create_contact(request)
-    else:
-        return show_contact_form(request)
+    return show_contact_form(request)
 
 
 def create_contact(request):
@@ -21,7 +20,7 @@ def create_contact(request):
     if not form.is_valid():
         return render(request, "contact/contact_form.html", {"form": form})
 
-    send_contact_email(form.cleaned_data)
+    _send_contact_email(form.cleaned_data)
 
     messages.success(request, "Contato concluído!")
     return HttpResponseRedirect("/contato/")
@@ -31,7 +30,7 @@ def show_contact_form(request):
     return render(request, "contact/contact_form.html", {"form": ContactForm()})
 
 
-def send_contact_email(contact_data):
+def _send_contact_email(contact_data):
     subject = "Contato eventif"
     from_email = settings.DEFAULT_FROM_EMAIL
     to_email = contact_data["email"]

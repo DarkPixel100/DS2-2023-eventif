@@ -1,8 +1,18 @@
 from django import forms
+from contact.models import Contact
+from django.core.exceptions import ValidationError
 
 
-class ContactForm(forms.Form):
-    name = forms.CharField(label="Nome")
-    phone = forms.CharField(label="Telefone", empty_value="Não inserido")
-    email = forms.EmailField(label="Email")
-    message = forms.CharField(label="Mensagem", widget=forms.Textarea)
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ["name", "phone", "email", "message"]
+
+    def clean_name(self):
+        name = self.cleaned_data["name"]
+        words = [w.capitalize() for w in name.split()]
+        return " ".join(words)
+
+    def clean_phone(self):
+        phone = self.cleaned_data["phone"]
+        return "Não inserido" if phone == "" else phone
