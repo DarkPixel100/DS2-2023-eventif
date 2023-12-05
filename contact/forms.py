@@ -10,7 +10,7 @@ class ContactForm(forms.ModelForm):
 
     def clean_name(self):
         name = self.cleaned_data["name"]
-        words = [w.capitalize() for w in name.split()]
+        words = [word.capitalize() for word in name.split()]
         return " ".join(words)
 
     def clean_phone(self):

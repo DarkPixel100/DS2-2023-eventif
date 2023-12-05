@@ -8,21 +8,21 @@ class ContactGetTest(TestCase):
     def setUp(self):
         self.response = self.client.get("/contato/")
 
-    def test_get_contact_form_status_code(self):
+    def test_contact_form_get_status_code(self):
         self.assertEqual(200, self.response.status_code)
 
-    def test_get_contact_form_template_used(self):
+    def test_contact_form_get_template_used(self):
         self.assertTemplateUsed(self.response, "contact/contact_form.html")
 
     def test_contact_form_structure(self):
-        tags = (
+        tags = [
             ("<form", 1),
             ("<input", 5),
             ('type="text"', 2),
             ("<textarea", 1),
             ('type="email"', 1),
             ('type="submit"', 1),
-        )
+        ]
         for text, count in tags:
             with self.subTest():
                 self.assertContains(self.response, text, count)

@@ -11,7 +11,7 @@ class ContactModelTest(TestCase):
             message="Mensagem teste",
         )
 
-    def test_create(self):
+    def test_contact_created(self):
         self.assertTrue(Contact.objects.exists())
 
     def test_phone_can_be_blank(self):
@@ -22,5 +22,5 @@ class ContactModelTest(TestCase):
         field = Contact._meta.get_field("message")
         self.assertTrue(field.blank)
 
-    def test_str(self):
+    def test_contact_str(self):
         self.assertEqual("Diego Avila", str(self.contact))
