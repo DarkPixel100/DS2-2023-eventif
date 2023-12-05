@@ -1,5 +1,6 @@
 from django.test import TestCase
 from contact.models import Contact
+from datetime import datetime
 
 
 class ContactModelTest(TestCase):
@@ -21,6 +22,12 @@ class ContactModelTest(TestCase):
     def test_message_can_be_blank(self):
         field = Contact._meta.get_field("message")
         self.assertTrue(field.blank)
+
+    def test_created_at(self):
+        self.assertIsInstance(self.contact.created_at, datetime)
+
+    def test_replied_default_false(self):
+        self.assertFalse(self.contact.replied)
 
     def test_contact_str(self):
         self.assertEqual("Diego Avila", str(self.contact))
