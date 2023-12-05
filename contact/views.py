@@ -18,25 +18,25 @@ def create_contact(request):
     form = ContactForm(request.POST)
 
     if not form.is_valid():
-        return render(request, "contact/contact_form.html", {"form": form})
+        return show_contact_form(request, form)
 
     contact_data = form.save()
-    _send_contact_email(contact_data)
+    _send_contact_email(
+        subject="Contato eventif",
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        to=(settings.DEFAULT_FROM_EMAIL, contact_data.email),
+        template_name="contact/contact_email.txt",
+        context={"contact": contact_data},
+    )
 
     messages.success(request, "Contato concluído!")
-    return HttpResponseRedirect(r("/contato/"))
+    return HttpResponseRedirect(r("contact"))
 
 
-def show_contact_form(request):
-    return render(request, "contact/contact_form.html", {"form": ContactForm()})
+def show_contact_form(request, form=ContactForm()):
+    return render(request, "contact/contact_form.html", {"form": form})
 
 
-def _send_contact_email(contact_data):
-    subject = "Contato eventif"
-    from_email = settings.DEFAULT_FROM_EMAIL
-    to_email = contact_data.email
-    template_name = "contact/contact_email.txt"
-    context = {"contact": contact_data}
-
+def _send_contact_email(subject, from_email, to, template_name, context):
     email_body = render_to_string(template_name, context)
-    mail.send_mail(subject, email_body, from_email, [from_email, to_email])
+    mail.send_mail(subject, email_body, from_email, to)
