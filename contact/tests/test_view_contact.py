@@ -1,12 +1,13 @@
-from django.core import mail
 from django.test import TestCase
+from django.core import mail
+from django.shortcuts import resolve_url as r
 
 from contact.forms import ContactForm
 
 
 class ContactGetTest(TestCase):
     def setUp(self):
-        self.response = self.client.get("/contato/")
+        self.response = self.client.get(r("contact"))
 
     def test_contact_form_get_status_code(self):
         self.assertEqual(200, self.response.status_code)
@@ -38,16 +39,16 @@ class ContactPostValidTest(TestCase):
             "name": "Diego",
             "phone": "53-99976-2828",
             "email": "diego.avila@aluno.riogrande.ifrs.edu.br",
-            "message": "oi",
+            "message": "Mensagem teste.",
         }
-        response = self.client.post("/contato/", data)
+        response = self.client.post(r("contact"), data)
         self.assertEqual(302, response.status_code)
         self.assertEqual(1, len(mail.outbox))
 
 
 class ContactPostInvalidTest(TestCase):
     def test_submit_invalid_contact_form(self):
-        response = self.client.post("/contato/", {})
+        response = self.client.post(r("contact"), {})
         self.assertEqual(200, response.status_code)
         self.assertTemplateUsed(response, "contact/contact_form.html")
         form = response.context["form"]
@@ -61,8 +62,8 @@ class ContactSuccessMessageTest(TestCase):
             "name": "Diego",
             "phone": "53-99976-2828",
             "email": "diego.avila@aluno.riogrande.ifrs.edu.br",
-            "message": "oi",
+            "message": "Mensagem teste.",
         }
-        response = self.client.post("/contato/", data, follow=True)
+        response = self.client.post(r("contact"), data, follow=True)
 
         self.assertContains(response, "Contato concluído!")

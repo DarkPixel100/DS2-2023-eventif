@@ -1,5 +1,6 @@
-from django.core import mail
 from django.test import TestCase
+from django.core import mail
+from django.shortcuts import resolve_url as r
 
 
 class MailTest(TestCase):
@@ -8,9 +9,9 @@ class MailTest(TestCase):
             "name": "Diego",
             "phone": "53-99976-2828",
             "email": "diego.avila@aluno.riogrande.ifrs.edu.br",
-            "message": "oi",
+            "message": "Mensagem teste.",
         }
-        self.response = self.client.post("/contato/", data)
+        self.response = self.client.post(r("contact"), data)
         self.email = mail.outbox[0]
 
     def assert_email_field_equal(self, field_name, expected_value):
@@ -35,7 +36,9 @@ class MailTest(TestCase):
             "Diego",
             "53-99976-2828",
             "diego.avila@aluno.riogrande.ifrs.edu.br",
-            "oi",
+            "Mensagem teste.",
         ]
         email_body = self.email.body
-        self.assertTrue(all(content in email_body for content in contents))
+        for content in contents:
+            with self.subTest():
+                self.assertIn(content, email_body)
