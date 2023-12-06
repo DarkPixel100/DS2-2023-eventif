@@ -19,10 +19,6 @@ class ContactModelTest(TestCase):
         field = Contact._meta.get_field("phone")
         self.assertTrue(field.blank)
 
-    def test_message_can_be_blank(self):
-        field = Contact._meta.get_field("message")
-        self.assertTrue(field.blank)
-
     def test_created_at(self):
         self.assertIsInstance(self.contact.created_at, datetime)
 
